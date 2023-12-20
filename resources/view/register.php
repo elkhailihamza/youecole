@@ -61,7 +61,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="./index.php?identifier=login">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>

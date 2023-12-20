@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . './vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -13,10 +13,10 @@ class database {
     private $name;
 
     public function __construct() {
-        $this->host = $_ENV['DB_HOST'];
-        $this->user = $_ENV['DB_user'];
-        $this->pass = $_ENV['DB_pass'];
-        $this->name = $_ENV['DB_name'];
+        $this->host = $_ENV["DB_HOST"];
+        $this->user = $_ENV["DB_user"];
+        $this->pass = $_ENV["DB_pass"];
+        $this->name = $_ENV["DB_name"];
     }
 
     protected function connexion() {

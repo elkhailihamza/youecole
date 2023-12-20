@@ -7,7 +7,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Register - SB Admin</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../public/assets/css/styles.css" rel="stylesheet" />
+        <link href="./public/assets/css/styles.css" rel="stylesheet" />
+
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
@@ -20,41 +22,41 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                                     <div class="card-body">
-                                        <form>
+                                        <form method="post">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
+                                                        <input class="form-control" name="fname" type="text" placeholder="Enter your first name" required/>
                                                         <label for="inputFirstName">First name</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
+                                                        <input class="form-control" name="lname" type="text" placeholder="Enter your last name" required/>
                                                         <label for="inputLastName">Last name</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" name="email" type="email" placeholder="name@example.com" required/>
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                                                        <input class="form-control" name="pass" type="password" placeholder="Create a password" required/>
                                                         <label for="inputPassword">Password</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                        <input class="form-control" name="confirmpass" type="password" placeholder="Confirm password" required/>
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-block" type="submit" name="submit" value="ruser">Create Account</button></div>
                                             </div>
                                         </form>
                                     </div>
@@ -83,6 +85,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="./public/assets/js/scripts.js"></script>
     </body>
 </html>

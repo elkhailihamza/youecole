@@ -104,14 +104,14 @@ class CRUDController
     public function editFormateur($user_id, $fname, $lname, $email, $role_id)
     {
         if ($this->crudModel->editFormateur($user_id, $fname, $lname, $email, $role_id)) {
-            header("Location: ./index.php?page=dashboard");
+            header("Location: ./index.php?page=admin_dashboard");
         }
     }
 
     public function delFormateur($user_id)
     {
         if ($this->crudModel->delFormateur($user_id)) {
-            header("Location: ./index.php?page=dashboard");
+            header("Location: ./index.php?page=admin_dashboard");
         } else {
             exit("error");
         }

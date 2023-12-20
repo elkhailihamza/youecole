@@ -18,8 +18,8 @@ class pageController
                 case 'register':
                     include_once(__DIR__ . "/../view/register.php");
                     break;
-                case 'dashboard':
-                    include_once(__DIR__ . "/../view/dashboard/dashboard.php");
+                case 'admin_dashboard':
+                    include_once(__DIR__ . "/../view/dashboard/admin_dashboard.php");
                     break;
             }
         } else {

@@ -14,7 +14,7 @@ class UserController
         if ($this->userModel->emailExists($email)) {
             if ($this->userModel->passMatches($email, $password)) {
                 if ($this->userModel->loginUser($email)) {
-                    header("Location: ./index.php?page=dashboard");
+                    header("Location: ./index.php?page=admin_dashboard");
                 } else {
                     header("Location: ./index.php");
                 }

@@ -64,7 +64,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <button class="nav-link bg-transparent border-0 py-0" type="submit" name="submit" value="dashboard">
+                        <button class="nav-link bg-transparent border-0 py-0" type="submit" name="submit" value="admin_dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </button>
@@ -141,9 +141,9 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Dashboard</h1>
+                    <h1 class="mt-4">Admin Dashboard</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Admin Table</li>
                     </ol>
                     <div class="mb-4">
                         <div class="container" style="height: 400px; overflow: auto;">

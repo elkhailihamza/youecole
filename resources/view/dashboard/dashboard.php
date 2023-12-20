@@ -23,9 +23,9 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark user-select-none">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="dashboard.php">Start Bootstrap</a>
+        <p class="navbar-brand ps-3 ">Dashboard</p>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -64,10 +64,10 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="dashboard.php">
+                        <button class="nav-link bg-transparent border-0 py-0" type="submit" name="submit" value="dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
-                        </a>
+                        </button>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -151,17 +151,16 @@
                                 <thead class="position-sticky bg-primary text-white" style="top: 0px;">
                                     <tr>
                                         <th>#</th>
-                                        <th>First_Name</th>
-                                        <th>Last_Name</th>
+                                        <th class="col-2">First Name</th>
+                                        <th class="col-2">Last Name</th>
                                         <th>Email</th>
-                                        <th>Role_id</th>
                                         <th>Role</th>
-                                        <th class="col-1">Controls</th>
+                                        <th style="width: 125px;">Controls</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $crud->getFormateurs();
+                                    $crud->showFormateurs();
                                     ?>
                                 </tbody>
                             </table>

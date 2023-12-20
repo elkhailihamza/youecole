@@ -24,4 +24,32 @@ class CRUDModel extends database
 
         return $result;
     }
+
+    public function editFormateur($user_id, $fname, $lname, $email, $role_id) {
+        $this->sql = "UPDATE `users` SET `first_name`=:fname,`last_name`=:lname,`email`=:email,`role_id`=:role_id WHERE user_id = :user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+
+        $stmt->bindParam(":fname", $fname, PDO::PARAM_STR);
+        $stmt->bindParam(":lname", $lname, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->bindParam(":role_id", $role_id, PDO::PARAM_INT);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+
+        if($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function delFormateur($user_id) {
+        $this->sql = "DELETE FROM `users` WHERE user_id = :user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        
+        if($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

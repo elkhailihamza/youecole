@@ -1,13 +1,14 @@
 <?php
 require(__DIR__ . "/./controllers/UserController.php");
 require(__DIR__ . "/./controllers/pageController.php");
-require(__DIR__ . "/./services/sessionManager.php");
+require(__DIR__ . "/./controllers/CRUDController.php");
+include(__DIR__ . "/./view/dashboard/includes/insertModal.php");
 
 $session = new sessionManager();
 $session->startSession();
 
-$user = new UserController($session);
-$page = new pageController($session);
+$user = new UserController();
+$page = new pageController();
 
 if (isset($_POST['submit'])) {
     $submit = $_POST['submit'];
@@ -21,7 +22,7 @@ if (isset($_POST['submit'])) {
             $user->userLogin($email, $pass);
             break;
         case 'logout':
-            $user->userLogin($email, $pass);
+            $user->logUserOut();
             break;
     }
 }

@@ -9,11 +9,16 @@
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="../../public/css/styles.css" rel="stylesheet" />
-    <link href="./public/css/styles.css" rel="stylesheet" />
+    <link href="../../public/assets/css/styles.css" rel="stylesheet" />
+    <link href="./public/assets/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <?php
-        $session = new sessionManager();
+    $session = new sessionManager();
+    $crud = new CRUDController();
+
+    if ($session->getSession("user_id") === null) {
+        header("Location: ./index.php?page=login");
+    }
     ?>
 </head>
 
@@ -145,23 +150,19 @@
                             <table class="table table-bordered">
                                 <thead class="position-sticky bg-primary text-white" style="top: 0px;">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>#</th>
+                                        <th>First_Name</th>
+                                        <th>Last_Name</th>
+                                        <th>Email</th>
+                                        <th>Role_id</th>
+                                        <th>Role</th>
+                                        <th class="col-1">Controls</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012/08/06</td>
-                                        <td>$137,500</td>
-                                    </tr>
+                                    <?php
+                                    $crud->getFormateurs();
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

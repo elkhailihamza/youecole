@@ -1,31 +1,29 @@
 <?php
 
 require_once(__DIR__ . "/../config/db.php");
+include_once (__DIR__ . "/../services/sessionManager.php");
 
 class UserModel extends database
 {
     private $sql;
-    protected $SessionManager;
-    protected $page;
-    public function __construct(SessionManager $SessionManager) {
+    private $sessionManager;
+    public function __construct()
+    {
         parent::__construct();
-        $this->SessionManager = $SessionManager;
-        if(isset($_GET['page'])) {
-            $this->page = $_GET['page'];
-        }
+        $this->sessionManager = new sessionManager();
     }
     public function loginUser($email)
     {
         $result = $this->findEmail($email);
         $row = $result;
-        
-        $this->SessionManager->setSession("user_id", $row['user_id']);
-        $this->SessionManager->setSession("fname", $row['first_name']);
-        $this->SessionManager->setSession("lname", $row['last_name']);
-        $this->SessionManager->setSession("email", $row['email']);
-        $this->SessionManager->setSession("role_id", $row['role_id']);
 
-        if(!empty($row)) {
+        $this->sessionManager->setSession("user_id", $row['user_id']);
+        $this->sessionManager->setSession("fname", $row['first_name']);
+        $this->sessionManager->setSession("lname", $row['last_name']);
+        $this->sessionManager->setSession("email", $row['email']);
+        $this->sessionManager->setSession("role_id", $row['role_id']);
+
+        if (!empty($row)) {
             return true;
         } else {
             return false;
@@ -61,7 +59,6 @@ class UserModel extends database
         $row = $result;
 
         if (password_verify($pass, $row['password'])) {
-            $this->page = "dashboard";
             return true;
         } else {
             return false;
@@ -81,10 +78,15 @@ class UserModel extends database
         $stmt->bindParam(":role_id", $role_id, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-            $this->page = "login";
             return true;
         } else {
             return false;
         }
+    }
+
+    public function logOutUser()
+    {
+        $this->sessionManager->destroySession();
+        return true;
     }
 }

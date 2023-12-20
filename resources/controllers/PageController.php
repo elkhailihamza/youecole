@@ -1,8 +1,13 @@
 <?php
 
-require_once(__DIR__ . "/../models/UserModel.php");
-class pageController extends UserModel
+class pageController
 {
+    private $page;
+    public function __construct() {
+        if(isset($_GET['page'])) {
+            $this->page = $_GET['page'];
+        }
+    }
     public function currentPage()
     {
         if (isset($this->page)) {
@@ -14,9 +19,6 @@ class pageController extends UserModel
                     include_once(__DIR__ . "/../view/register.php");
                     break;
                 case 'dashboard':
-                    include_once(__DIR__ . "/../view/dashboard/dashboard.php");
-                    break;
-                case 'logout':
                     include_once(__DIR__ . "/../view/dashboard/dashboard.php");
                     break;
             }

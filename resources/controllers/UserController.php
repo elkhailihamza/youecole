@@ -8,11 +8,10 @@ class UserController extends UserModel
     {
         if ($this->emailExists($email)) {
             if ($this->passMatches($email, $password)) {
-                $row = $this->loginUser($email);
-                if($this->loginUser($email)) {
-                    include_once (__DIR__ . "./../view/dashboard/dashboard.php");
+                if ($this->loginUser($email)) {
+                    header("Location: ./index.php?page=dashboard");
                 } else {
-                    exit("Error Login!");
+                    header("Location: ./index.php");
                 }
             }
         } else {
@@ -26,7 +25,7 @@ class UserController extends UserModel
             if ($pass === $confirmpass) {
                 $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
                 if ($this->registerUser($fname, $lname, $email, $hashedPass)) {
-                    return true;
+                    header("Location: ./index.php?page=login");
                 } else {
                     exit("Error Register!");
                 }

@@ -41,7 +41,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="index.php?identifier=register">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="index.php?page=register">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>

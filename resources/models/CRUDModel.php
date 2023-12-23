@@ -8,7 +8,7 @@ class CRUDModel extends database
     public function getUsers($filter)
     {
         if (isset($filter) && $filter = 'apprenant') {
-                $this->sql = "SELECT 
+            $this->sql = "SELECT 
             users.user_id, 
             users.first_name, 
             users.last_name, 
@@ -33,13 +33,35 @@ class CRUDModel extends database
         roles ON users.role_id = roles.role_id;";
         }
         $stmt = $this->connexion()->prepare($this->sql);
-        if(isset($filter)) {
+        if (isset($filter)) {
             $stmt->bindParam(":apprenant", $filter, PDO::PARAM_STR);
         }
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
+    }
+    public function getClasses()
+    {
+        $this->sql = "SELECT classes.class_id, classes.formateur_id, classes.class_name, classes.class_description, users.first_name, users.last_name FROM classes JOIN users ON classes.formateur_id = users.user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function insertClass($cname, $cdesc, $formateur_id)
+    {
+        $this->sql = "INSERT INTO `classes`(`formateur_id`, `class_name`, `class_description`) VALUES (:formateur, :cname, :cdesc);";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":formateur", $formateur_id, PDO::PARAM_INT);
+        $stmt->bindParam(":cname", $cname, PDO::PARAM_STR);
+        $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function editUser($user_id, $fname, $lname, $email, $role_id)
@@ -71,4 +93,5 @@ class CRUDModel extends database
             return false;
         }
     }
+
 }

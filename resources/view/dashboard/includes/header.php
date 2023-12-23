@@ -9,8 +9,6 @@
     <?php
     $session = new sessionManager();
     $crud = new CRUDController();
-
-
     ?>
 </head>
 

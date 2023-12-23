@@ -6,6 +6,7 @@ class CRUDController
 {
     private $crudModel;
     private $session;
+    private $result;
     private $filter;
     public function __construct()
     {
@@ -16,28 +17,50 @@ class CRUDController
     public function showAllApprenants()
     {
         $this->filter = "apprenant";
-        $result = $this->crudModel->getUsers($this->filter);
-        $this->userTable($result);
+        $this->result = $this->crudModel->getUsers($this->filter);
+        $this->userTable();
     }
     public function showAllUsers()
     {
         $this->filter = null;
-        $result = $this->crudModel->getUsers($this->filter);
-        $this->userTable($result);
+        $this->result = $this->crudModel->getUsers($this->filter);
+        $this->userTable();
     }
-    public function showAllClasses() {
-        
+    public function showAllClasses()
+    {
+        $this->result = $this->crudModel->getClasses();
+        $this->classTable();
     }
-    public function classTable() {
-
+    public function classTable()
+    {
+        if (!empty($this->result)) {
+            foreach ($this->result as $row) {
+                ?>
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <?= $row['class_name'] ?> By: <?= $row['first_name'] . " " . $row['last_name'] ?>
+                        </h5>
+                        <p class="card-text">
+                            <?= $row['class_description'] ?>
+                        </p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            echo 'No Classes Available at This Moment.';
+        }
     }
-    public function userTable($result)
+    public function userTable()
     {
 
-        if (!empty($result)) {
+        if (!empty($this->result)) {
             $i = 0;
-            foreach ($result as $row) {
-                if ($this->session->getSession("fname") === $row['first_name']) {
+            foreach ($this->result as $row) {
+                if ($this->session->getSession("user_id") === $row['user_id'] ) {
                     continue;
                 } else {
                     ?>
@@ -89,7 +112,7 @@ class CRUDController
                                         </svg>
                                     </button>
                                     <?php
-                                    include(__DIR__ . "/../view/dashboard/includes/insertModal.php");
+                                    include(__DIR__ . "/../view/dashboard/includes/editModal.php");
                                     ?>
                                     <form method="post">
                                         <input type="hidden" value="<?= $row['user_id'] ?>" name="user_id">
@@ -119,6 +142,13 @@ class CRUDController
                 EMPTY
             </td>
             <?php
+        }
+    }
+    public function insertClass($cname, $cdesc)
+    {
+        $formateur_id = $this->session->getSession("user_id");
+        if ($this->crudModel->insertClass($cname, $cdesc, $formateur_id)) {
+            header("Location: ./index.php?page=formateur_view");
         }
     }
     public function editUser($user_id, $fname, $lname, $email, $role_id)

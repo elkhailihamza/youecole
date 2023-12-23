@@ -68,7 +68,7 @@ class UserModel extends database
     public function registerUser($fname, $lname, $email, $pass)
     {
         $role_id = 1;
-        $this->sql = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `role_id`) VALUES (:fname,:lname,:email,:pass,:role_id)";
+        $this->sql = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `role_id`, `class_id`) VALUES (:fname, :lname, :email, :pass, :role_id, null)";
         $stmt = $this->connexion()->prepare($this->sql);
 
         $stmt->bindParam(":fname", $fname, PDO::PARAM_STR);

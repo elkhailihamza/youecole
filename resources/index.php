@@ -21,6 +21,10 @@ if (isset($_POST['submit'])) {
             extract($_POST);
             $user->userLogin($email, $pass);
             break;
+        case 'insertClass':
+            extract($_POST);
+            $crud->insertClass($cname, $cdesc);
+            break;
         case 'edit':
             extract($_POST);
             $crud->editUser($user_id, $fname, $lname, $email, $role_id);

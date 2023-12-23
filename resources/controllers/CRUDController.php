@@ -34,13 +34,15 @@ class CRUDController
     public function classTable()
     {
         if (!empty($this->result)) {
-            foreach ($this->result as $row) {
+            foreach ($this->result as $k => $row) {
+
                 ?>
-                <div class="card" style="width: 18rem;">
+                <div class="card flex-shrink-0" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <?= $row['class_name'] ?> By: <?= $row['first_name'] . " " . $row['last_name'] ?>
+                            <?= $row['class_name'] ?> By:
+                            <?= $row['first_name'] . " " . $row['last_name'] ?>
                         </h5>
                         <p class="card-text">
                             <?= $row['class_description'] ?>
@@ -60,7 +62,7 @@ class CRUDController
         if (!empty($this->result)) {
             $i = 0;
             foreach ($this->result as $row) {
-                if ($this->session->getSession("user_id") === $row['user_id'] ) {
+                if ($this->session->getSession("user_id") === $row['user_id']) {
                     continue;
                 } else {
                     ?>

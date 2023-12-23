@@ -25,7 +25,7 @@ include(__DIR__ . "./includes/insertModal.php");
                         <i class="fas fa-chart-area me-1"></i>
                         Classes
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex gap-3" style="overflow: auto; height: 350px; flex-wrap: wrap;">
                         <?php
                         $crud->showAllClasses();
                         ?>

@@ -12,13 +12,17 @@ class CRUDModel extends database
             users.user_id, 
             users.first_name, 
             users.last_name, 
-            users.email, 
+            users.email,
             users.role_id, 
-            roles.role_name 
+            roles.role_name,
+            users.class_id,
+            classes.class_name
         FROM 
             users 
         INNER JOIN 
-            roles ON users.role_id = roles.role_id WHERE roles.role_name IN (:apprenant)";
+            roles ON users.role_id = roles.role_id
+        LEFT JOIN 
+            classes ON users.class_id = classes.class_id WHERE roles.role_name IN (:apprenant);";
         } else {
             $this->sql = "SELECT 
         users.user_id, 

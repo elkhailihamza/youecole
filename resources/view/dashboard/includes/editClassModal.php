@@ -1,9 +1,9 @@
-<div class="modal fade" id="exampleModal<?= $row['class_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="editClassModal<?= $row['class_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title d-flex align-items-center">Edit ClassRoom: 
+                <h5 class="modal-title d-flex align-items-center">Edit classroom: 
                     <?= $row['class_name'] ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -88,7 +88,7 @@ class CRUDController
                                     </button>
                                     <button type="button"
                                         class="btn btn-success mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row['user_id'] ?>">
+                                        data-bs-toggle="modal" data-bs-target="#editUserModal<?= $row['user_id'] ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                             stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
@@ -172,8 +172,19 @@ class CRUDController
                             ?>
                             <div class="d-flex gap-2">
                                 <button type="button"
+                                    class="btn btn-dark mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
+                                    data-bs-toggle="modal" data-bs-target="#addUserModal"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="8.5" cy="7" r="4"></circle>
+                                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                                    </svg>
+                                </button>
+                                <button type="button"
                                     class="btn btn-success mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row['class_id'] ?>">
+                                    data-bs-toggle="modal" data-bs-target="#editClassModal<?= $row['class_id'] ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                         stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>

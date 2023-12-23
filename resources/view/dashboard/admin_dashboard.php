@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . "./includes/admin_header.php");
+include(__DIR__ . "./includes/header.php");
 ?>
 <div class="container-fluid px-4">
     <h1 class="mt-4">Admin Dashboard</h1>
@@ -30,4 +30,5 @@ include(__DIR__ . "./includes/admin_header.php");
     </div>
 
     <?php
-    include(__DIR__ . "./includes/admin_footer.php");
+    include(__DIR__ . "./includes/footer.php");
+    ?>

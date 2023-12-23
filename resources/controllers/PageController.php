@@ -28,6 +28,9 @@ class pageController
                 case 'formateur_dashboard':
                     include_once(__DIR__ . "/../view/dashboard/formateur_dashboard.php");
                     break;
+                case 'formateur_view':
+                    include_once(__DIR__ . "/../view/dashboard/formateur_view.php");
+                    break;
             }
         } else {
             include_once(__DIR__ . "/../view/login.php");

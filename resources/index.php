@@ -23,15 +23,23 @@ if (isset($_POST['submit'])) {
             break;
         case 'insertClass':
             extract($_POST);
-            $crud->insertClass($cname, $cdesc);
+            $crud->insertClassRoom($cname, $cdesc);
             break;
         case 'edit':
             extract($_POST);
-            $crud->editUser($user_id, $fname, $lname, $email, $role_id);
+            if(isset($user_id)) {
+                $crud->editUser($user_id, $fname, $lname, $email, $role_id);
+            } else if (isset($class_id)) {
+                $crud->editClassRoom($class_id, $cname, $cdesc);
+            }
             break;
         case 'del':
             extract($_POST);
-            $crud->delUser($user_id);
+            if(isset($user_id)) {
+                $crud->delUser($user_id);
+            } else if (isset($class_id)) {
+                $crud->delClassRoom($class_id);
+            }
             break;
         case 'logout':
             $user->logUserOut();

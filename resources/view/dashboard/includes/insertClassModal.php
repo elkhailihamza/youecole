@@ -9,13 +9,13 @@
                 <form method="post" class="d-flex flex-column">
                     <div class="mb-3 container">
                         <div class="form-floating mb-3">
-                            <input class="form-control" name="cname" type="text" placeholder="edit fname" />
+                            <input class="form-control" name="cname" type="text" placeholder="edit fname" maxlength="125" required/>
                             <label>Class Room Name</label>
                         </div>
                     </div>
                     <div class="mb-3 container">
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" name="cdesc"
+                            <textarea class="form-control" name="cdesc" maxlength="300" required
                                 style="resize: none; height: 250px;"></textarea>
                             <label>Description</label>
                         </div>

@@ -27,7 +27,7 @@ class UserController
                             header("Location: ./index.php?page=apprenant_dashboard");
                             break;
                         case '1':
-                            header("Location: ./index.php?page=no-role_dashboard");
+                            header("Location: ./index.php?page=no-role");
                             break;
                         case '0':
                             header("Location: ./index.php?page=banned");

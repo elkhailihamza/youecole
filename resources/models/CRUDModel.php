@@ -41,29 +41,6 @@ class CRUDModel extends database
 
         return $result;
     }
-    public function getClasses()
-    {
-        $this->sql = "SELECT classes.class_id, classes.formateur_id, classes.class_name, classes.class_description, users.first_name, users.last_name FROM classes JOIN users ON classes.formateur_id = users.user_id;";
-        $stmt = $this->connexion()->prepare($this->sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    }
-
-    public function insertClass($cname, $cdesc, $formateur_id)
-    {
-        $this->sql = "INSERT INTO `classes`(`formateur_id`, `class_name`, `class_description`) VALUES (:formateur, :cname, :cdesc);";
-        $stmt = $this->connexion()->prepare($this->sql);
-        $stmt->bindParam(":formateur", $formateur_id, PDO::PARAM_INT);
-        $stmt->bindParam(":cname", $cname, PDO::PARAM_STR);
-        $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function editUser($user_id, $fname, $lname, $email, $role_id)
     {
         $this->sql = "UPDATE `users` SET `first_name`=:fname,`last_name`=:lname,`email`=:email,`role_id`=:role_id WHERE user_id = :user_id;";
@@ -93,5 +70,52 @@ class CRUDModel extends database
             return false;
         }
     }
+    public function getClassRooms()
+    {
+        $this->sql = "SELECT classes.class_id, classes.formateur_id, classes.class_name, classes.class_description, users.first_name, users.last_name FROM classes JOIN users ON classes.formateur_id = users.user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    public function insertClassRoom($cname, $cdesc, $formateur_id)
+    {
+        $this->sql = "INSERT INTO `classes`(`formateur_id`, `class_name`, `class_description`) VALUES (:formateur, :cname, :cdesc);";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":formateur", $formateur_id, PDO::PARAM_INT);
+        $stmt->bindParam(":cname", $cname, PDO::PARAM_STR);
+        $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function editClassRoom($class_id, $cname, $cdesc)
+    {
+        $this->sql = "UPDATE `classes` SET `class_name`=:cname,`class_description`=:cdesc WHERE class_id = :class_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
 
+        $stmt->bindParam(":cname", $cname, PDO::PARAM_STR);
+        $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
+        $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function delClassRoom($class_id)
+    {
+        $this->sql = "DELETE FROM `classes` WHERE class_id = :class_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -109,6 +109,7 @@
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
                     <?= $session->getSession("fname") ?>
+                    <?= " " . $session->getSession("lname") ?>
                 </div>
             </nav>
         </div>

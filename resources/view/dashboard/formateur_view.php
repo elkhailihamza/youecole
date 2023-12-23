@@ -1,6 +1,6 @@
 <?php
 include(__DIR__ . "./includes/header.php");
-include(__DIR__ . "./includes/insertModal.php");
+include(__DIR__ . "./includes/insertClassModal.php");
 ?>
 <div class="container-fluid px-4">
     <h1 class="mt-4">Formateur Dashboard</h1>
@@ -23,11 +23,11 @@ include(__DIR__ . "./includes/insertModal.php");
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area me-1"></i>
-                        Classes
+                        Class Rooms
                     </div>
                     <div class="card-body d-flex gap-3" style="overflow: auto; height: 350px; flex-wrap: wrap;">
                         <?php
-                        $crud->showAllClasses();
+                        $crud->showAllClassRooms();
                         ?>
                     </div>
                 </div>

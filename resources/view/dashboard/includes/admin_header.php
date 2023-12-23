@@ -64,7 +64,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link py-0 gap-1" href="./index.php?page=admin_view"><i
+                        <a class="nav-link py-0 gap-1" href="./index.php?page=admin_dashboard"><i
                                 class="fas fa-tachometer-alt"></i><span>Overview</span></a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"

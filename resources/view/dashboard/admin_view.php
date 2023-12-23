@@ -25,5 +25,8 @@ include(__DIR__ . "./includes/admin_header.php");
                     ?>
                 </tbody>
             </table>
-            <?php
-            include(__DIR__ . "./includes/admin_footer.php");
+        </div>
+    </div>
+</div>
+<?php
+include(__DIR__ . "./includes/admin_footer.php");

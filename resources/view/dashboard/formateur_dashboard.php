@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>Dashboard - SB Formateur</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="../../public/assets/css/styles.css" rel="stylesheet" />
     <link href="./public/assets/css/styles.css" rel="stylesheet" />
@@ -65,7 +65,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
                         <button class="nav-link bg-transparent border-0 py-0" type="submit" name="submit"
-                            value="admin_dashboard">
+                            value="Formateur_dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </button>
@@ -73,13 +73,13 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Users
+                            Classes
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="./index.php?page=admin_view">View all users</a>
+                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
                             </nav>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Admin Dashboard</h1>
+                    <h1 class="mt-4">Formateur Dashboard</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Admin Table</li>
+                        <li class="breadcrumb-item active">Formateur Table</li>
                     </ol>
                     <div class="mb-4">
                         <div class="container" style="height: 400px; overflow: auto;">
@@ -112,7 +112,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $crud->showAllUsers();
+                                    $crud->showApprenants();
                                     ?>
                                 </tbody>
                             </table>

@@ -32,7 +32,7 @@
                     <div class="mb-3 container">
                         <div class="form-floating mb-3">
                             <select class="form-select" name="role_id">
-                                <option value="1" selected hidden>
+                                <option value="<?= $row['role_name'] ?>" selected hidden>
                                     <?= $row['role_name'] ?>
                                 </option>
                                 <option value="1">No Role</option>

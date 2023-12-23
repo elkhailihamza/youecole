@@ -73,13 +73,13 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Users
+                            Statistics
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="./index.php?page=admin_view">View all users</a>
+                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
                             </nav>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Admin Dashboard</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Admin Table</li>
+                        <li class="breadcrumb-item active">View all users</li>
                     </ol>
                     <div class="mb-4">
                         <div class="container" style="height: 400px; overflow: auto;">

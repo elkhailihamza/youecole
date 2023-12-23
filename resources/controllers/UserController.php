@@ -6,7 +6,9 @@ require_once(__DIR__ . "/../services/sessionManager.php");
 class UserController
 {
     private $userModel;
+    private $session;
     public function __construct() {
+        $this->session = new sessionManager();
         $this->userModel = new UserModel();
     }
     public function userLogin($email, $password)
@@ -14,7 +16,23 @@ class UserController
         if ($this->userModel->emailExists($email)) {
             if ($this->userModel->passMatches($email, $password)) {
                 if ($this->userModel->loginUser($email)) {
-                    header("Location: ./index.php?page=admin_dashboard");
+                    switch($this->session->getSession("role_id")) {
+                        case '4':
+                            header("Location: ./index.php?page=admin_dashboard");
+                            break;
+                        case '3':
+                            header("Location: ./index.php?page=formateur_dashboard");
+                            break;
+                        case '2':
+                            header("Location: ./index.php?page=apprenant_dashboard");
+                            break;
+                        case '1':
+                            header("Location: ./index.php?page=no-role_dashboard");
+                            break;
+                        case '0':
+                            header("Location: ./index.php?page=banned");
+                            break;
+                    }
                 } else {
                     header("Location: ./index.php");
                 }

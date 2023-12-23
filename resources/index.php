@@ -23,11 +23,11 @@ if (isset($_POST['submit'])) {
             break;
         case 'edit':
             extract($_POST);
-            $crud->editFormateur($user_id, $fname, $lname, $email, $role_id);
+            $crud->editUser($user_id, $fname, $lname, $email, $role_id);
             break;
         case 'del':
             extract($_POST);
-            $crud->delFormateur($user_id);
+            $crud->delUser($user_id);
             break;
         case 'logout':
             $user->logUserOut();

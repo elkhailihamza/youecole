@@ -6,18 +6,34 @@ class CRUDController
 {
     private $crudModel;
     private $session;
+    private $filter;
     public function __construct()
     {
         $this->session = new sessionManager();
         $this->crudModel = new CRUDModel();
+
     }
-    public function getFormateurs()
+    public function getUsers($filter)
     {
-        return $this->crudModel->getFormateurs();
+        return $this->crudModel->getUsers($filter);
     }
-    public function showFormateurs()
+    public function getApprenants() {
+        $this->filter = "apprenant";
+        return $this->crudModel->getUsers($this->filter);
+    }
+    public function showApprenants()
     {
-        $result = $this->getFormateurs();
+        $result = $this->getApprenants();
+        $this->userTable($result);
+    }
+    public function showAllUsers()
+    {
+        $this->filter = null;
+        $result = $this->getUsers($this->filter);
+        $this->userTable($result);
+    }
+    public function userTable($result)
+    {
 
         if (!empty($result)) {
             $i = 0;
@@ -100,17 +116,15 @@ class CRUDController
             <?php
         }
     }
-
-    public function editFormateur($user_id, $fname, $lname, $email, $role_id)
+    public function editUser($user_id, $fname, $lname, $email, $role_id)
     {
-        if ($this->crudModel->editFormateur($user_id, $fname, $lname, $email, $role_id)) {
+        if ($this->crudModel->editUser($user_id, $fname, $lname, $email, $role_id)) {
             header("Location: ./index.php?page=admin_dashboard");
         }
     }
-
-    public function delFormateur($user_id)
+    public function delUser($user_id)
     {
-        if ($this->crudModel->delFormateur($user_id)) {
+        if ($this->crudModel->delUser($user_id)) {
             header("Location: ./index.php?page=admin_dashboard");
         } else {
             exit("error");

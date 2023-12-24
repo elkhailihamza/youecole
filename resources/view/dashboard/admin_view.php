@@ -12,9 +12,10 @@ include(__DIR__ . "./includes/header.php");
                 <thead class="position-sticky bg-primary text-white" style="top: 0px;">
                     <tr>
                         <th>#</th>
-                        <th class="col-2">First Name</th>
-                        <th class="col-2">Last Name</th>
-                        <th>Email</th>
+                        <th class="col-4">First Name</th>
+                        <th class="col-4">Last Name</th>
+                        <th class="col-4">Email</th>
+                        <th class="col-4">ClassRoom</th>
                         <th>Role</th>
                         <th style="width: 125px;">Controls</th>
                     </tr>

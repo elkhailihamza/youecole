@@ -14,13 +14,14 @@ include(__DIR__ . "./includes/header.php");
                         <th>#</th>
                         <th class="col-2">First Name</th>
                         <th class="col-2">Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th class="col-4">Email</th>
+                        <th class="col-3">ClassRoom</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $crud->showAllApprenants();
+                    $type = 1;
+                    $crud->showAllApprenants($type);
                     ?>
                 </tbody>
             </table>

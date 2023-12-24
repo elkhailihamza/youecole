@@ -25,6 +25,10 @@ if (isset($_POST['submit'])) {
             extract($_POST);
             $crud->insertClassRoom($cname, $cdesc);
             break;
+        case 'addToClass':
+            extract($_POST);
+            $crud->addApprenantToClassRoom($student, $class_id);
+            break;
         case 'edit':
             extract($_POST);
             if(isset($user_id)) {

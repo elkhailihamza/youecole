@@ -14,17 +14,25 @@ class CRUDController
         $this->crudModel = new CRUDModel();
 
     }
-    public function showAllApprenants()
+    public function getUsers($filter)
     {
-        $this->filter = "apprenant";
-        $this->result = $this->crudModel->getUsers($this->filter);
-        $this->userTable();
+        return $this->crudModel->getUsers($filter);
     }
     public function showAllUsers()
     {
         $this->filter = null;
-        $this->result = $this->crudModel->getUsers($this->filter);
+        $this->result = $this->getUsers($this->filter);
         $this->userTable();
+    }
+    public function showAllApprenants($type)
+    {
+        $this->filter = 2;
+        $this->result = $this->getUsers($this->filter);
+        if ($type == 1) {
+            $this->userTable();
+        } else if ($type == 2) {
+            $this->showReadyApprenants();
+        }
     }
     public function editUser($user_id, $fname, $lname, $email, $role_id)
     {
@@ -38,9 +46,44 @@ class CRUDController
             header("Location: ./index.php?page=admin_view");
         }
     }
+    public function showReadyApprenants()
+    {
+        if (!empty($this->result)) {
+            $i = 0;
+            foreach ($this->result as $row) {
+                if ($row['class_id'] == null) {
+                    $i++;
+                    ?>
+                    <div class="d-flex justify-content-between">
+                        <span>
+                            <?= $i . ") " . $row['first_name'] . " " . $row['last_name'] . " - " . $row['role_name'] ?>
+                        </span>
+                        <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
+                    </div>
+                    <?php
+                } else {
+                    continue;
+                }
+            }
+        } else {
+            ?>
+            <td>
+                No students left..
+            </td>
+            <?php
+        }
+    }
+    public function addApprenantToClassRoom($student, $class_id)
+    {
+        if (isset($student) && is_array($student)) {
+            foreach ($student as $s) {
+                $this->crudModel->addApprenantToClassRoom($class_id, $s);
+            }
+            header("Location: ./index.php?page=formateur_view");
+        }
+    }
     public function userTable()
     {
-
         if (!empty($this->result)) {
             $i = 0;
             foreach ($this->result as $row) {
@@ -62,19 +105,24 @@ class CRUDController
                             <?= $row['email'] ?>
                         </td>
                         <td>
-                            <div class="d-flex justify-content-between">
-                                <h6>
-                                    <?= $row['role_name'] ?>
-                                </h6>
-                                <h6>
-                                    [
-                                    <?= $row['role_id'] ?>]
-                                </h6>
-                            </div>
+                            <?php
+                                echo (isset($row['class_name'])) ? $row['class_name'] : 'NONE';
+                            ?>
                         </td>
                         <?php
                         if ($this->session->getSession("role_id") == 4) {
                             ?>
+                            <td>
+                                <div class="d-flex justify-content-between">
+                                    <h6>
+                                        <?= $row['role_name'] ?>
+                                    </h6>
+                                    <h6>
+                                        [
+                                        <?= $row['role_id'] ?>]
+                                    </h6>
+                                </div>
+                            </td>
                             <td>
                                 <div class="d-flex justify-content-around">
                                     <button type="button"
@@ -173,7 +221,7 @@ class CRUDController
                             <div class="d-flex gap-2">
                                 <button type="button"
                                     class="btn btn-dark mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
-                                    data-bs-toggle="modal" data-bs-target="#addUserModal"><svg
+                                    data-bs-toggle="modal" data-bs-target="#addUserModal<?= $row['class_id'] ?>"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                         stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -182,6 +230,9 @@ class CRUDController
                                         <line x1="23" y1="11" x2="17" y2="11"></line>
                                     </svg>
                                 </button>
+                                <?php
+                                include(__DIR__ . "/../view/dashboard/includes/insertUserModal.php");
+                                ?>
                                 <button type="button"
                                     class="btn btn-success mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
                                     data-bs-toggle="modal" data-bs-target="#editClassModal<?= $row['class_id'] ?>">

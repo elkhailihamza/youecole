@@ -7,7 +7,7 @@ class CRUDModel extends database
     private $sql;
     public function getUsers($filter)
     {
-        if (isset($filter) && $filter = 'apprenant') {
+        if (isset($filter)) {
             $this->sql = "SELECT 
             users.user_id, 
             users.first_name, 
@@ -22,23 +22,26 @@ class CRUDModel extends database
         INNER JOIN 
             roles ON users.role_id = roles.role_id
         LEFT JOIN 
-            classes ON users.class_id = classes.class_id WHERE roles.role_name IN (:apprenant);";
+            classes ON users.class_id = classes.class_id WHERE roles.role_id = :role_id;";
         } else {
             $this->sql = "SELECT 
-        users.user_id, 
-        users.first_name, 
-        users.last_name, 
-        users.email, 
-        users.role_id, 
-        roles.role_name 
-    FROM 
-        users 
-    INNER JOIN 
-        roles ON users.role_id = roles.role_id;";
+            users.user_id, 
+            users.first_name, 
+            users.last_name, 
+            users.email,
+            users.role_id, 
+            roles.role_name,
+            classes.class_name
+        FROM 
+            users 
+        INNER JOIN 
+            roles ON users.role_id = roles.role_id
+        LEFT JOIN 
+            classes ON users.class_id = classes.class_id;";
         }
         $stmt = $this->connexion()->prepare($this->sql);
         if (isset($filter)) {
-            $stmt->bindParam(":apprenant", $filter, PDO::PARAM_STR);
+            $stmt->bindParam(":role_id", $filter, PDO::PARAM_INT);
         }
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -56,11 +59,7 @@ class CRUDModel extends database
         $stmt->bindParam(":role_id", $role_id, PDO::PARAM_INT);
         $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute() ? true : false;
     }
     public function delUser($user_id)
     {
@@ -68,11 +67,16 @@ class CRUDModel extends database
         $stmt = $this->connexion()->prepare($this->sql);
         $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute() ? true : false;
+    }
+    public function addApprenantToClassRoom($class_id, $user_id)
+    {
+        $this->sql = "UPDATE `users` SET `class_id`=:class_id WHERE user_id = :user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+
+        return $stmt->execute() ? true : false;
     }
     public function getClassRooms()
     {
@@ -89,11 +93,8 @@ class CRUDModel extends database
         $stmt->bindParam(":formateur", $formateur_id, PDO::PARAM_INT);
         $stmt->bindParam(":cname", $cname, PDO::PARAM_STR);
         $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return $stmt->execute() ? true : false;
     }
     public function editClassRoom($class_id, $cname, $cdesc)
     {
@@ -104,11 +105,7 @@ class CRUDModel extends database
         $stmt->bindParam(":cdesc", $cdesc, PDO::PARAM_STR);
         $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute() ? true : false;
     }
     public function delClassRoom($class_id)
     {
@@ -116,10 +113,6 @@ class CRUDModel extends database
         $stmt = $this->connexion()->prepare($this->sql);
         $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->execute() ? true : false;
     }
 }

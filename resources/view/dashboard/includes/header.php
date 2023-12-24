@@ -83,32 +83,46 @@
                         </div>
                         <?php
                     } else if ($session->getSession("role_id") == 3) {
-                    ?>
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link py-0 gap-1" href="./index.php?page=formateur_dashboard"><i
-                                    class="fas fa-tachometer-alt"></i><span>Overview</span></a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Classes
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link gap-1 px-1" href="./index.php?page=formateur_view"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 3.8l16.4 16.4M20.2 3.8L3.8 20.2M15 3h6v6M9 3H3v6M15 21h6v-6M9 21H3v-6"/></svg>Manage ClassRooms</a>
-                                </nav>
+                        ?>
+                            <div class="nav">
+                                <div class="sb-sidenav-menu-heading">Core</div>
+                                <a class="nav-link py-0 gap-1" href="./index.php?page=formateur_dashboard"><i
+                                        class="fas fa-tachometer-alt"></i><span>Overview</span></a>
+                                <div class="sb-sidenav-menu-heading">Interface</div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    Classes
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link gap-1 px-1" href="./index.php?page=formateur_view"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                                fill="none" stroke="#FFFFFF1F" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path
+                                                    d="M3.8 3.8l16.4 16.4M20.2 3.8L3.8 20.2M15 3h6v6M9 3H3v6M15 21h6v-6M9 21H3v-6" />
+                                            </svg>Manage ClassRooms</a>
+                                    </nav>
+                                </div>
                             </div>
-                        </div>
-                    <?php
+                        <?php
+                    } else if ($session->getSession("role_id") == 2) {
+                        ?>
+                                <div class="nav">
+                                    <div class="sb-sidenav-menu-heading">Core</div>
+                                    <a class="nav-link py-0 gap-1" href="./index.php?page=apprenant_dashboard"><i
+                                            class="fas fa-tachometer-alt"></i><span>Welcome Screen</span></a>
+                                </div>
+                        <?php
                     }
                     ?>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <?= $session->getSession("fname") . " " . $session->getSession("lname")?>
+                    <?= $session->getSession("fname") . " " . $session->getSession("lname") ?>
                 </div>
             </nav>
         </div>

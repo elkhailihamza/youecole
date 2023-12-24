@@ -23,11 +23,7 @@ class UserModel extends database
         $this->sessionManager->setSession("email", $row['email']);
         $this->sessionManager->setSession("role_id", $row['role_id']);
 
-        if (!empty($row)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !empty($row) ? true : false;
     }
     public function findEmail($email)
     {
@@ -36,20 +32,13 @@ class UserModel extends database
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
 
-        $result = $stmt->fetch();
-        return $result;
+        return $stmt->fetch();
     }
 
     public function emailExists($email)
     {
-
         $result = $this->findEmail($email);
-
-        if (!empty($result)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !empty($result) ? true : false;
     }
 
     public function passMatches($email, $pass)
@@ -58,11 +47,7 @@ class UserModel extends database
         $result = $this->findEmail($email);
         $row = $result;
 
-        if (password_verify($pass, $row['password'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return password_verify($pass, $row['password']) ? true : false;
     }
 
     public function registerUser($fname, $lname, $email, $pass)
@@ -76,12 +61,8 @@ class UserModel extends database
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":pass", $pass, PDO::PARAM_STR);
         $stmt->bindParam(":role_id", $role_id, PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return $stmt->execute() ? true : false;
     }
 
     public function logOutUser()

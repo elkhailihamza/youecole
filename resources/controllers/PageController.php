@@ -31,6 +31,12 @@ class pageController
                 case 'formateur_view':
                     include_once(__DIR__ . "/../view/dashboard/formateur_view.php");
                     break;
+                case 'apprenant_dashboard':
+                    include_once(__DIR__ . "/../view/dashboard/apprenant_dashboard.php");
+                    break;
+                case 'apprenant_view':
+                    include_once(__DIR__ . "/../view/dashboard/apprenant_view.php");
+                    break;
                 default:
                     include_once(__DIR__ . "/../view/login.php");
             }

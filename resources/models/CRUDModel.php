@@ -115,4 +115,24 @@ class CRUDModel extends database
 
         return $stmt->execute() ? true : false;
     }
+    public function getUserCurrentClassRoom($user_id)
+    {
+        $this->sql = "SELECT
+        classes.class_id,
+        formateur.first_name,
+        formateur.last_name,
+        classes.class_name,
+        classes.class_description
+    FROM
+        users
+    INNER JOIN classes ON users.class_id = classes.class_id
+    LEFT JOIN users AS formateur ON formateur.user_id = classes.formateur_id
+    WHERE
+        users.user_id = :user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }

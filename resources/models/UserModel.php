@@ -1,31 +1,29 @@
 <?php
 
 require_once(__DIR__ . "/../config/db.php");
+include_once (__DIR__ . "/../services/sessionManager.php");
 
 class UserModel extends database
 {
     private $sql;
-    protected $sessionManager;
-    public function __construct(sessionManager $sessionManager) {
+    private $sessionManager;
+    public function __construct()
+    {
         parent::__construct();
-        $this->sessionManager = $sessionManager;
+        $this->sessionManager = new sessionManager();
     }
     public function loginUser($email)
     {
         $result = $this->findEmail($email);
         $row = $result;
-        
+
         $this->sessionManager->setSession("user_id", $row['user_id']);
         $this->sessionManager->setSession("fname", $row['first_name']);
         $this->sessionManager->setSession("lname", $row['last_name']);
         $this->sessionManager->setSession("email", $row['email']);
         $this->sessionManager->setSession("role_id", $row['role_id']);
 
-        if(!empty($row)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !empty($row) ? true : false;
     }
     public function findEmail($email)
     {
@@ -34,20 +32,13 @@ class UserModel extends database
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
 
-        $result = $stmt->fetch();
-        return $result;
+        return $stmt->fetch();
     }
 
     public function emailExists($email)
     {
-
         $result = $this->findEmail($email);
-
-        if (!empty($result)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !empty($result) ? true : false;
     }
 
     public function passMatches($email, $pass)
@@ -56,17 +47,13 @@ class UserModel extends database
         $result = $this->findEmail($email);
         $row = $result;
 
-        if (password_verify($pass, $row['password'])) {
-            return true;
-        } else {
-            return false;
-        }
+        return password_verify($pass, $row['password']) ? true : false;
     }
 
     public function registerUser($fname, $lname, $email, $pass)
     {
         $role_id = 1;
-        $this->sql = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `role_id`) VALUES (:fname,:lname,:email,:pass,:role_id)";
+        $this->sql = "INSERT INTO `users`(`first_name`, `last_name`, `email`, `password`, `role_id`, `class_id`) VALUES (:fname, :lname, :email, :pass, :role_id, null)";
         $stmt = $this->connexion()->prepare($this->sql);
 
         $stmt->bindParam(":fname", $fname, PDO::PARAM_STR);
@@ -74,11 +61,13 @@ class UserModel extends database
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":pass", $pass, PDO::PARAM_STR);
         $stmt->bindParam(":role_id", $role_id, PDO::PARAM_STR);
+        
+        return $stmt->execute() ? true : false;
+    }
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+    public function logOutUser()
+    {
+        $this->sessionManager->destroySession();
+        return true;
     }
 }

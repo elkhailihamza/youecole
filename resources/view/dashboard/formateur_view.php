@@ -21,11 +21,7 @@ include(__DIR__ . "./includes/insertClassModal.php");
             </div>
             <div class="col-xl-12">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Class Rooms
-                    </div>
-                    <div class="card-body d-flex gap-3" style="overflow: auto; height: 350px; flex-wrap: wrap;">
+                    <div class="card-body d-flex gap-3 ms-2" style="overflow: auto; height: 375px; flex-wrap: wrap;">
                         <?php
                         $crud->showAllClassRooms();
                         ?>

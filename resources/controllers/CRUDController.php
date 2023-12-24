@@ -119,7 +119,7 @@ class CRUDController
                                 </div>
                             </td>
                             <td>
-                                <div class="d-flex justify-content-around">
+                                <div class="d-flex justify-content-between">
                                     <button type="button"
                                         class="btn btn-warning mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -202,7 +202,7 @@ class CRUDController
 
                 ?>
                 <div class="card flex-shrink-0" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="./public/assets/img/thumbnail.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">
                             <?= $row['class_name'] ?>

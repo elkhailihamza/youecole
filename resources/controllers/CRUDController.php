@@ -56,21 +56,16 @@ class CRUDController
                     ?>
                     <div class="d-flex justify-content-between">
                         <span>
-                            <?= $i . ") " . $row['first_name'] . " " . $row['last_name'] . " - " . $row['role_name'] ?>
+                            <?= $i . ") " . $row['first_name'] . " " . $row['last_name'] ?>
                         </span>
-                        <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
+                        <span>
+                            <?= $row['role_name'] ?>
+                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
+                        </span>
                     </div>
                     <?php
-                } else {
-                    continue;
                 }
             }
-        } else {
-            ?>
-            <td>
-                No students left..
-            </td>
-            <?php
         }
     }
     public function addApprenantToClassRoom($student, $class_id)
@@ -106,7 +101,7 @@ class CRUDController
                         </td>
                         <td>
                             <?php
-                                echo (isset($row['class_name'])) ? $row['class_name'] : 'NONE';
+                            echo (isset($row['class_name'])) ? $row['class_name'] : 'NONE';
                             ?>
                         </td>
                         <?php

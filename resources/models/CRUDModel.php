@@ -22,7 +22,7 @@ class CRUDModel extends database
         INNER JOIN 
             roles ON users.role_id = roles.role_id
         LEFT JOIN 
-            classes ON users.class_id = classes.class_id WHERE roles.role_id = :role_id;";
+            classes ON users.class_id = classes.class_id WHERE roles.role_id = :role_id ORDER BY classes.class_name DESC;";
         } else {
             $this->sql = "SELECT 
             users.user_id, 
@@ -77,6 +77,15 @@ class CRUDModel extends database
         $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
 
         return $stmt->execute() ? true : false;
+    }
+    public function getAllApprenantsinClass($class_id)
+    {
+        $this->sql = "SELECT users.first_name, users.last_name, roles.role_name FROM `users` INNER JOIN roles ON users.role_id = roles.role_id WHERE class_id = :class_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getClassRooms()
     {

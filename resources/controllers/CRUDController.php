@@ -45,7 +45,9 @@ class CRUDController
                         <p class="card-text">
                             <?= $row['class_description'] ?>
                         </p>
-                        <span>By: <?= $row['first_name'] . ", " . $row['last_name'] ?></span>
+                        <span>By:
+                            <?= $row['first_name'] . ", " . $row['last_name'] ?>
+                        </span>
                     </div>
                 </div>
                 <?php
@@ -104,12 +106,38 @@ class CRUDController
                         </span>
                         <span>
                             <?= $row['role_name'] ?>
-                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
+                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" required />
                         </span>
                     </div>
                     <?php
                 }
             }
+        }
+    }
+    public function showAllApprenantsinClass($class_id)
+    {
+        $this->result = $this->crudModel->getAllApprenantsinClass($class_id);
+        $this->displayAllApprenantsinClass();
+    }
+    public function displayAllApprenantsinClass()
+    {
+        if (!empty($this->result)) {
+            $i = 0;
+            foreach ($this->result as $row) {
+                $i++;
+                ?>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <?= $i . ") " . $row['first_name'] . " " . $row['last_name'] ?>
+                    </span>
+                    <span>
+                        <?= $row['role_name'] ?>
+                    </span>
+                </div>
+                <?php
+            }
+        } else {
+            echo 'No Apprenant here..';
         }
     }
     public function addApprenantToClassRoom($student, $class_id)
@@ -271,6 +299,20 @@ class CRUDController
                                 </button>
                                 <?php
                                 include(__DIR__ . "/../view/dashboard/includes/insertUserModal.php");
+                                ?>
+                                <button type="button"
+                                    class="btn btn-primary mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
+                                    data-bs-toggle="modal" data-bs-target="#viewUserModal<?= $row['class_id'] ?>"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </button>
+                                <?php
+                                include(__DIR__ . "/../view/dashboard/includes/viewUserModal.php");
                                 ?>
                                 <button type="button"
                                     class="btn btn-success mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"

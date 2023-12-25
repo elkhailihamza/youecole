@@ -78,9 +78,19 @@ class CRUDModel extends database
 
         return $stmt->execute() ? true : false;
     }
-    public function getAllApprenantsinClass($class_id)
+    public function rmApprenantToClassRoom($user_id)
     {
-        $this->sql = "SELECT users.first_name, users.last_name, roles.role_name FROM `users` INNER JOIN roles ON users.role_id = roles.role_id WHERE class_id = :class_id;";
+        $class_id = null;
+        $this->sql = "UPDATE `users` SET `class_id`=:class_id WHERE user_id = :user_id;";
+        $stmt = $this->connexion()->prepare($this->sql);
+        $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+
+        return $stmt->execute() ? true : false;
+    }
+    public function getApprenantsinClass($class_id)
+    {
+        $this->sql = "SELECT users.user_id, users.first_name, users.last_name, roles.role_name FROM `users` INNER JOIN roles ON users.role_id = roles.role_id WHERE class_id = :class_id;";
         $stmt = $this->connexion()->prepare($this->sql);
         $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
 

@@ -70,15 +70,10 @@ class CRUDController
         $this->result = $this->getUsers($this->filter);
         $this->userTable();
     }
-    public function showAllApprenants($type)
+    public function showAllApprenants()
     {
-        $this->filter = 2;
-        $this->result = $this->getUsers($this->filter);
-        if ($type == 1) {
-            $this->userTable();
-        } else if ($type == 2) {
-            $this->showReadyApprenants();
-        }
+        $this->result = $this->getUsers(2);
+        $this->userTable();
     }
     public function editUser($user_id, $fname, $lname, $email, $role_id)
     {
@@ -91,6 +86,11 @@ class CRUDController
         if ($this->crudModel->delUser($user_id)) {
             header("Location: ./index.php?page=admin_view");
         }
+    }
+    public function insertReadyApprenants()
+    {
+        $this->result = $this->getUsers(2);
+        return $this->showReadyApprenants();
     }
     public function showReadyApprenants()
     {
@@ -106,18 +106,56 @@ class CRUDController
                         </span>
                         <span>
                             <?= $row['role_name'] ?>
-                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" required />
+                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
                         </span>
                     </div>
                     <?php
                 }
             }
+            return ($i == 0) ? false : true;
         }
     }
-    public function showAllApprenantsinClass($class_id)
+    public function getApprenantsinClass($class_id)
     {
-        $this->result = $this->crudModel->getAllApprenantsinClass($class_id);
-        $this->displayAllApprenantsinClass();
+        $this->result = $this->crudModel->getApprenantsinClass($class_id);
+        return $this->showApprenantsinClass(1);
+    }
+    public function rmApprenantsinClass($class_id)
+    {
+        $this->result = $this->crudModel->getApprenantsinClass($class_id);
+        return $this->showApprenantsinClass(2);
+    }
+    public function showApprenantsinClass($type)
+    {
+        if (!empty($this->result)) {
+            $i = 0;
+            foreach ($this->result as $row) {
+                $i++;
+                ?>
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <?= $i . ") " . $row['first_name'] . " " . $row['last_name'] ?>
+                    </span>
+                    <span>
+                        <?= $row['role_name'] ?>
+                        <?php
+                        if ($type == 2) {
+                            ?>
+                            <input type="checkbox" name="student[]" value="<?= $row['user_id'] ?>" />
+                            <?php
+                        }
+                        ?>
+                    </span>
+                </div>
+                <?php
+            }
+            return ($i == 0) ? false : true;
+        }
+    }
+    public function removeApprenants($class_id)
+    {
+        $this->result = $this->crudModel->getApprenantsinClass($class_id);
+
     }
     public function displayAllApprenantsinClass()
     {
@@ -145,6 +183,15 @@ class CRUDController
         if (isset($student) && is_array($student)) {
             foreach ($student as $s) {
                 $this->crudModel->addApprenantToClassRoom($class_id, $s);
+            }
+            header("Location: ./index.php?page=formateur_view");
+        }
+    }
+    public function rmApprenantToClassRoom($student)
+    {
+        if (isset($student) && is_array($student)) {
+            foreach ($student as $s) {
+                $this->crudModel->rmApprenantToClassRoom($s);
             }
             header("Location: ./index.php?page=formateur_view");
         }
@@ -299,6 +346,19 @@ class CRUDController
                                 </button>
                                 <?php
                                 include(__DIR__ . "/../view/dashboard/includes/insertUserModal.php");
+                                ?>
+                                <button type="button"
+                                    class="btn btn-warning mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"
+                                    data-bs-toggle="modal" data-bs-target="#removeUserModal<?= $row['class_id'] ?>"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="8.5" cy="7" r="4"></circle>
+                                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                                    </svg>
+                                </button>
+                                <?php
+                                include(__DIR__ . "/../view/dashboard/includes/removeUserModal.php");
                                 ?>
                                 <button type="button"
                                     class="btn btn-primary mb-1 ml-3 py-1 px-1 border-0 d-flex justify-content-center align-items-center"

@@ -1,5 +1,4 @@
 <?php
-
 require_once(__DIR__ . "/../models/UserModel.php");
 require_once(__DIR__ . "/../services/sessionManager.php");
 
@@ -41,7 +40,6 @@ class UserController
             exit("Email or Password do not match!");
         }
     }
-
     public function userRegister($fname, $lname, $email, $pass, $confirmpass)
     {
         if (!$this->userModel->emailExists($email)) {
@@ -59,7 +57,6 @@ class UserController
             exit("Email already in use!");
         }
     }
-
     public function logUserOut()
     {
         if($this->userModel->logOutUser()) {

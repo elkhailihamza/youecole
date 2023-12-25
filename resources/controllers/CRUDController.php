@@ -185,6 +185,8 @@ class CRUDController
                 $this->crudModel->addApprenantToClassRoom($class_id, $s);
             }
             header("Location: ./index.php?page=formateur_view");
+        } else {
+            header("Location: ./index.php?page=formateur_view");
         }
     }
     public function rmApprenantToClassRoom($student)
@@ -193,6 +195,8 @@ class CRUDController
             foreach ($student as $s) {
                 $this->crudModel->rmApprenantToClassRoom($s);
             }
+            header("Location: ./index.php?page=formateur_view");
+        } else {
             header("Location: ./index.php?page=formateur_view");
         }
     }

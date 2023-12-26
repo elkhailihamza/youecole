@@ -88,7 +88,7 @@ class CRUDModel extends database
 
         return $stmt->execute() ? true : false;
     }
-    public function getApprenantsinClass($class_id)
+    public function getApprenantsfromClass($class_id)
     {
         $this->sql = "SELECT users.user_id, users.first_name, users.last_name, roles.role_name FROM `users` INNER JOIN roles ON users.role_id = roles.role_id WHERE class_id = :class_id;";
         $stmt = $this->connexion()->prepare($this->sql);

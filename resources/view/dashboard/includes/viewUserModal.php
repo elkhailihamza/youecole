@@ -15,7 +15,7 @@ $crud = new CRUDController();
             <div class="modal-body" style="height: 500px;">
                 <div style="height: 450px; overflow: auto;">
                     <?php
-                    $result = $crud->getApprenantsinClass($row['class_id']);
+                    $result = $crud->getApprenantsfromClass($row['class_id'], 3);
                     echo (!$result) ? 'No Apprenant here..' : '' ;
                     ?>
                 </div>

@@ -20,7 +20,7 @@ include(__DIR__ . "./includes/header.php");
                 </thead>
                 <tbody>
                     <?php
-                    $crud->showAllApprenants('normal');
+                    $crud->showAllApprenants();
                     ?>
                 </tbody>
             </table>

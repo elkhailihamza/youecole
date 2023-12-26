@@ -16,7 +16,7 @@ $crud = new CRUDController();
                 <form method="post" class="d-flex flex-column justify-content-between" style="height: 475px;">
                     <div style="height: 450px; overflow: auto;">
                         <?php
-                        $result = $crud->insertReadyApprenants();
+                        $result = $crud->getApprenantsfromClass(null, 1);
                         ?>
                     </div>
                     <?php
